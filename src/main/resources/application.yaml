@@ -1,0 +1,35 @@
+# swagger-ui url: /swagger-ui/index.html
+
+spring:
+  profiles:
+    active: "development"
+    default: "development"
+  main:
+    banner-mode: off
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        show_sql: true
+        format-sql: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bookstore
+    username: postgres
+    password: root
+    driverClassName: org.postgresql.Driver
+  sql:
+    init:
+      platform: postgres
+
+server:
+  error:
+    include-message=always: always
+
+
+custom:
+  jwt:
+    expiration: 30
+    signature : c2VjcmV0cm9tYXJpb3NpbXBsZXN0b3JlMjAyMg==

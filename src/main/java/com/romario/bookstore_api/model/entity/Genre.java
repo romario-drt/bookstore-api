@@ -1,9 +1,7 @@
 package com.romario.bookstore_api.model.entity;
 
 import com.romario.bookstore_api.Enum.GenreType;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -12,7 +10,8 @@ import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Genre extends AbstractModel {

@@ -6,6 +6,7 @@ import com.romario.bookstore_api.exception.NotFoundException;
 import com.romario.bookstore_api.exception.PasswordMismatchException;
 import com.romario.bookstore_api.model.entity.Customer;
 import com.romario.bookstore_api.model.request.CustomerReq;
+import com.romario.bookstore_api.model.request.CustomerUpdReq;
 import com.romario.bookstore_api.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,10 +22,11 @@ public class CustomerController {
     private final CustomerService customerService;
     private final ReqToCustomer reqToCustomerConverter;
 
-
     @GetMapping("/{id}")
     public Customer single(@PathVariable int id, CustomerReq newCustomer) {
         return customerService.findById(id).orElseThrow(() -> new NotFoundException("customer"));
+        //TODO general users should only be able to access their own data
+        //TODO admin users can access other customers
     }
 
     @PostMapping()
@@ -40,6 +42,22 @@ public class CustomerController {
         Customer toSave = reqToCustomerConverter.convert(customerReq);
 
         return customerService.save(toSave);
+    }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Customer update(
+            @RequestBody @Valid CustomerUpdReq reqBody,
+            @PathVariable int id
+    ) {
+
+        //TODO users should only update their own data.
+
+        Customer customer = customerService.findById(id).orElseThrow(() -> new NotFoundException("customer"));
+        customer.setFirstname(reqBody.getFirstname());
+        customer.setLastname(reqBody.getLastname());
+
+        return customerService.save(customer);
     }
 
 }

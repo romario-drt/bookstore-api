@@ -7,6 +7,7 @@ spring:
   main:
     banner-mode: off
   jpa:
+    defer-datasource-initialization: true #Allow JPA in conjunction with data.sql population script
     database: POSTGRESQL
     show-sql: true
     hibernate:
@@ -23,10 +24,13 @@ spring:
   sql:
     init:
       platform: postgres
+      mode: always #script-based initialization is performed by default only for embedded databases, #use this to always initialize
 
 server:
   error:
-    include-message=always: always
+    include-message: always
+
+
 
 
 custom:

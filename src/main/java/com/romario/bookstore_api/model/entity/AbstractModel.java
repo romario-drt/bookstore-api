@@ -20,16 +20,14 @@ public class AbstractModel {
 
     private LocalDateTime updateDate;
 
+    @PreUpdate
     @PrePersist
-    public void prepareCreationDate(){
-        if (this.creationDate == null){
+    public void prepareCreationDate() {
+
+        this.updateDate = LocalDateTime.now();
+        if (this.creationDate == null) {
             this.creationDate = LocalDateTime.now();
         }
-    }
-
-    @PreUpdate
-    public void prepareUpdateDate(){
-        this.updateDate = LocalDateTime.now();
     }
 
 }

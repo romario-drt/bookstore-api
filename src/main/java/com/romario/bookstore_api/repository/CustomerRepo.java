@@ -14,4 +14,6 @@ public interface CustomerRepo extends PagingAndSortingRepository<Customer, Integ
     @Query("SELECT c FROM Customer c where c.email = :email")
     Optional<Customer> findByEmail( @Param("email") String email);
 
+    boolean existsByEmail(String email);
+
 }

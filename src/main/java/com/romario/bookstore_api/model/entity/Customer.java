@@ -1,9 +1,12 @@
 package com.romario.bookstore_api.model.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import java.util.List;
 
@@ -16,7 +19,11 @@ public class Customer extends AbstractModel {
 
     private String firstname;
     private String lastname;
+
+    @Column(unique = true)
     private String email;
+
+
     private String password;
     private boolean isAdmin;
 

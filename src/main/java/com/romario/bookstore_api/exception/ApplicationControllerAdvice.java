@@ -13,6 +13,12 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class ApplicationControllerAdvice {
 
+    @ExceptionHandler(ExistingResource.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiError handleExistingResource(ExistingResource ex){
+        return new ApiError(ex.getMessage());
+    }
+
     @ExceptionHandler(PasswordMismatchException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiError handlePasswordMismatchException(PasswordMismatchException ex){

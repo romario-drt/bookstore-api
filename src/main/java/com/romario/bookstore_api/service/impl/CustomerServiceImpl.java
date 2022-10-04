@@ -16,8 +16,8 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerRepo customerRepo;
 
     @Override
-    public Customer findById(Integer id) {
-        return customerRepo.findById(id).orElseThrow( () -> new NotFoundException("customer"));
+    public Optional<Customer> findById(Integer id) {
+        return customerRepo.findById(id);
     }
 
     @Override
@@ -28,5 +28,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Customer save(Customer customer) {
         return customerRepo.save(customer);
+    }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        return customerRepo.existsByEmail(email);
     }
 }

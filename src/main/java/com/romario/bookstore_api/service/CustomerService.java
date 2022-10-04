@@ -6,11 +6,13 @@ import java.util.Optional;
 
 public interface CustomerService {
 
-    Customer findById ( Integer id );
+    Optional<Customer> findById ( Integer id );
 
     Customer findByEmail ( String email );
 
     Customer save (Customer customer);
+
+    boolean existsByEmail (String email);
 
 }
 

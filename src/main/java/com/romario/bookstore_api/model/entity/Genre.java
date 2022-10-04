@@ -20,6 +20,6 @@ public class Genre extends AbstractModel {
     @Enumerated(EnumType.STRING)
     public GenreType genre;
 
-    @OneToMany(mappedBy = "genre`")
+    @OneToMany(mappedBy = "genre")
     private List<Book> books;
 }

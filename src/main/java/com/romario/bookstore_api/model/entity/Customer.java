@@ -18,6 +18,7 @@ public class Customer extends AbstractModel {
     private String lastname;
     private String email;
     private String password;
+    private boolean isAdmin;
 
     @OneToMany(mappedBy = "customer")
     private List<BookOrder> orders;

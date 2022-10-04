@@ -1,8 +1,11 @@
 package com.romario.bookstore_api.model.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Data
 @MappedSuperclass
 public class AbstractModel {
 

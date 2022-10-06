@@ -5,7 +5,6 @@ import com.romario.bookstore_api.Enum.GenreType;
 import com.romario.bookstore_api.model.entity.Author;
 import com.romario.bookstore_api.model.entity.Book;
 import com.romario.bookstore_api.model.entity.Genre;
-import com.romario.bookstore_api.model.entity.Publisher;
 import com.romario.bookstore_api.model.request.BookReq;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
@@ -18,7 +17,6 @@ public class RepToBookConverter implements Converter<BookReq, Book> {
     public Book convert(BookReq source) {
         Book b = new Book();
         Genre genre = new Genre();
-        Publisher publisher = new Publisher();
 
         b.setTitle(source.getTitle());
         b.setIsbn(source.getIsbn());
@@ -29,9 +27,6 @@ public class RepToBookConverter implements Converter<BookReq, Book> {
 
         genre.setGenre(GenreType.valueOf(source.getGenre()));
         b.setGenre(genre);
-
-        publisher.setName(source.getPublisher());
-        b.setPublisher(publisher);
 
         b.setCondition(BookConditionType.valueOf(source.getCondition()));
 

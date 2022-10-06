@@ -41,10 +41,6 @@ public class Book extends AbstractModel {
     @JoinColumn
     private Genre genre;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
-    @JoinColumn
-    private Publisher publisher;
-
     @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private List<Author> authors;
 }

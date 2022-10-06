@@ -6,9 +6,9 @@ import java.util.Optional;
 
 public interface BookService {
 
-    Optional<Book> findById (Integer id );
+    Book findById (Integer id );
 
-    Optional<Book> findByTitle (String title);
+    Book findByTitle (String title);
 
     Book save (Book book);
 

@@ -3,15 +3,14 @@ package com.romario.bookstore_api.Enum;
 
 public enum GenreType {
 
-    COMEDY,
-    DRAMA,
     ADVENTURE,
-    ACTION,
-    FICTION,
+    MYSTERY,
+    FANTASY,
     HORROR,
-    THRILLER,
-    CARTOON,
-    ANIME,
-    LEARNING
-
+    ROMANCE,
+    SUSPENSE,
+    HISTORY,
+    POETRY,
+    DRAMA,
+    NOVEL
 }

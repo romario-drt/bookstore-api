@@ -25,24 +25,26 @@ public class Book extends AbstractModel {
     @Enumerated(EnumType.STRING)
     private BookConditionType condition;
 
-    @ISBN
     private String isbn;
 
     private String publishedDate;
+
+    @Column(length = 500, nullable = false)
+    private String img;
 
     @Column(scale = 2, precision = 20)
     private BigDecimal price;
 
     private int quantity;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE}, optional = false)
     @JoinColumn
     private Genre genre;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, optional = false)
     @JoinColumn
     private Publisher publisher;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private List<Author> authors;
 }

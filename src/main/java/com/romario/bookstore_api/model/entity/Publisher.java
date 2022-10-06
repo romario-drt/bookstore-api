@@ -4,9 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import java.util.List;
 
 @Entity
 @Data
@@ -14,8 +13,6 @@ import java.util.List;
 @AllArgsConstructor
 public class Publisher extends AbstractModel {
 
+    @Column(unique = true)
     public String name;
-
-    @OneToMany(mappedBy = "publisher")
-    private List<Book> books;
 }

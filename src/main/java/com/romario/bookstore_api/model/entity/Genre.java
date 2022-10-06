@@ -3,11 +3,7 @@ package com.romario.bookstore_api.model.entity;
 import com.romario.bookstore_api.Enum.GenreType;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.OneToMany;
-import java.util.List;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -16,9 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Genre extends AbstractModel {
 
+    @Column(unique = true)
     @Enumerated(EnumType.STRING)
     public GenreType genre;
-
-    @OneToMany(mappedBy = "genre")
-    private List<Book> books;
 }

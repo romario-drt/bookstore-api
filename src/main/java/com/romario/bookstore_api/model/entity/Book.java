@@ -5,10 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.validator.constraints.ISBN;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 
@@ -27,7 +27,7 @@ public class Book extends AbstractModel {
 
     private String isbn;
 
-    private String publishedDate;
+    private LocalDate publishedDate;
 
     @Column(length = 500, nullable = false)
     private String img;

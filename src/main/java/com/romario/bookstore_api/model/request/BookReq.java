@@ -47,9 +47,6 @@ public class BookReq {
     @ValidEnumType(enumClass = GenreType.class, message = "{validation.genre.invalid}")
     public String genre;
 
-    @NotBlank(message = "{validation.publisher.required}")
-    private String publisher;
-
     @NotEmptyList(message = "{validation.authors.required}")
     private List<@NotBlank(message = "{validation.authors.required}") String> authors;
 

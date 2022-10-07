@@ -20,7 +20,7 @@ public class RepToBookConverter implements Converter<BookReq, Book> {
 
         b.setTitle(source.getTitle());
         b.setIsbn(source.getIsbn());
-        b.setPublishedDate(source.getPublisher());
+        b.setPublishedDate(source.getPublishedDate());
         b.setQuantity(source.getQuantity());
         b.setPrice(source.getPrice());
         b.setImg(source.getImg());

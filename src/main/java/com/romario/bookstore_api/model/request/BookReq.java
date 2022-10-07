@@ -1,7 +1,6 @@
 package com.romario.bookstore_api.model.request;
 
 import com.romario.bookstore_api.Enum.BookConditionType;
-import com.romario.bookstore_api.Enum.GenreType;
 import com.romario.bookstore_api.custom.validation.NotEmptyList;
 import com.romario.bookstore_api.custom.validation.ValidEnumType;
 import lombok.AllArgsConstructor;
@@ -43,8 +42,7 @@ public class BookReq {
     @Max(value = 99, message = "{validation.quantity.max}")
     private int quantity;
 
-    @NotNull(message = "{validation.genre.required}")
-    @ValidEnumType(enumClass = GenreType.class, message = "{validation.genre.invalid}")
+    @NotBlank(message = "{validation.genre.required}")
     public String genre;
 
     @NotEmptyList(message = "{validation.authors.required}")

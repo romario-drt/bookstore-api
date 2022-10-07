@@ -28,7 +28,7 @@ public class BookController {
             throw new ExistingResource("Book", request.getTitle());
 
         //TODO get the genre
-        //TODO get the publisher
+
         //TODO get the authors
 
         Book toSave = converter.convert(request);

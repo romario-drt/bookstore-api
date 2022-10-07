@@ -1,7 +1,6 @@
 package com.romario.bookstore_api.custom.converter;
 
 import com.romario.bookstore_api.Enum.BookConditionType;
-import com.romario.bookstore_api.Enum.GenreType;
 import com.romario.bookstore_api.model.entity.Author;
 import com.romario.bookstore_api.model.entity.Book;
 import com.romario.bookstore_api.model.entity.Genre;
@@ -25,7 +24,7 @@ public class RepToBookConverter implements Converter<BookReq, Book> {
         b.setPrice(source.getPrice());
         b.setImg(source.getImg());
 
-        genre.setGenre(GenreType.valueOf(source.getGenre()));
+        genre.setGenre(source.getGenre());
         b.setGenre(genre);
 
         b.setCondition(BookConditionType.valueOf(source.getCondition()));

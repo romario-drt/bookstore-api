@@ -1,11 +1,13 @@
 package com.romario.bookstore_api.Controller;
 
+import com.romario.bookstore_api.custom.converter.BookToResConverter;
 import com.romario.bookstore_api.custom.converter.RepToBookConverter;
 import com.romario.bookstore_api.exception.ExistingResource;
 import com.romario.bookstore_api.model.entity.Author;
 import com.romario.bookstore_api.model.entity.Book;
 import com.romario.bookstore_api.model.entity.Genre;
 import com.romario.bookstore_api.model.request.BookReq;
+import com.romario.bookstore_api.model.response.BookResponse;
 import com.romario.bookstore_api.service.AuthorService;
 import com.romario.bookstore_api.service.BookService;
 import com.romario.bookstore_api.service.GenreService;
@@ -28,10 +30,11 @@ public class BookController {
     private final AuthorService authorService;
 
     private final RepToBookConverter converter;
+    private final BookToResConverter bookResponseConverter;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public Book save(@Valid @RequestBody BookReq request) {
+    public BookResponse save(@Valid @RequestBody BookReq request) {
 
         //check if book exists
         if (bookService.findByTitle(request.getTitle()).isPresent())
@@ -54,6 +57,7 @@ public class BookController {
             exists.ifPresentOrElse(toSave.getAuthors()::add, () -> toSave.getAuthors().add(new Author(requestAuthor)));
         });
 
-        return bookService.save(toSave);
+        bookService.save(toSave);
+        return bookResponseConverter.convert(toSave);
     }
 }

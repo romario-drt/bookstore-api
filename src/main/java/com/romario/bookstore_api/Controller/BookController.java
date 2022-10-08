@@ -3,6 +3,7 @@ package com.romario.bookstore_api.Controller;
 import com.romario.bookstore_api.custom.converter.BookToResConverter;
 import com.romario.bookstore_api.custom.converter.RepToBookConverter;
 import com.romario.bookstore_api.exception.ExistingResource;
+import com.romario.bookstore_api.exception.NotFoundException;
 import com.romario.bookstore_api.model.entity.Author;
 import com.romario.bookstore_api.model.entity.Book;
 import com.romario.bookstore_api.model.entity.Genre;
@@ -30,7 +31,15 @@ public class BookController {
     private final AuthorService authorService;
 
     private final RepToBookConverter converter;
-    private final BookToResConverter bookResponseConverter;
+    private final BookToResConverter bookResConverter;
+
+
+    @GetMapping("/{title}")
+    @ResponseStatus(HttpStatus.OK)
+    public BookResponse findByTitle(@PathVariable String title) {
+        Book found = bookService.findByTitle(title).orElseThrow(() -> new NotFoundException("Book"));
+        return bookResConverter.convert(found);
+    }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
@@ -58,6 +67,6 @@ public class BookController {
         });
 
         bookService.save(toSave);
-        return bookResponseConverter.convert(toSave);
+        return bookResConverter.convert(toSave);
     }
 }

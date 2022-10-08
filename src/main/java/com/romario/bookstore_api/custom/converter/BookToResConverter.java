@@ -23,6 +23,7 @@ public class BookToResConverter implements Converter<Book, BookResponse> {
         response.setIsbn(s.getIsbn());
         response.setPrice(s.getPrice());
         response.setQuantity(s.getQuantity());
+        response.setPublishedDate(s.getPublishedDate());
 
         response.setGenre(s.getGenre().getGenre());
         response.setAuthors(s.getAuthors()

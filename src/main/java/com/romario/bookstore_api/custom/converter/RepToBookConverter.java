@@ -15,7 +15,6 @@ public class RepToBookConverter implements Converter<BookReq, Book> {
     @Override
     public Book convert(BookReq source) {
         Book b = new Book();
-        Genre genre = new Genre();
 
         b.setTitle(source.getTitle());
         b.setIsbn(source.getIsbn());
@@ -23,13 +22,7 @@ public class RepToBookConverter implements Converter<BookReq, Book> {
         b.setQuantity(source.getQuantity());
         b.setPrice(source.getPrice());
         b.setImg(source.getImg());
-
-        genre.setGenre(source.getGenre());
-        b.setGenre(genre);
-
         b.setCondition(BookConditionType.valueOf(source.getCondition()));
-
-        b.setAuthors(source.getAuthors().stream().map(Author::new).collect(Collectors.toList()));
 
         return b;
     }

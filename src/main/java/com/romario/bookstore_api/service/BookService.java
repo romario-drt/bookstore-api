@@ -6,13 +6,10 @@ import java.util.Optional;
 
 public interface BookService {
 
-    Book findById (Integer id );
-
-    Book findByTitle (String title);
+    Optional<Book> findByTitle (String title);
 
     Book save (Book book);
 
-    boolean existsByTitle (String title);
 
 }
 

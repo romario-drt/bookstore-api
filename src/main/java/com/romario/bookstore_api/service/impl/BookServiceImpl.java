@@ -16,13 +16,8 @@ public class BookServiceImpl implements BookService {
     private final BooksRepo booksRepo;
 
     @Override
-    public Book findById(Integer id) {
-        return booksRepo.findById(id).orElseThrow( () -> new NotFoundException("Book"));
-    }
-
-    @Override
-    public Book findByTitle(String title) {
-        return booksRepo.findByTitle(title).orElseThrow( () -> new NotFoundException("Book"));
+    public Optional<Book> findByTitle(String title) {
+        return booksRepo.findByTitle(title);
     }
 
     @Override
@@ -30,8 +25,4 @@ public class BookServiceImpl implements BookService {
         return booksRepo.save(book);
     }
 
-    @Override
-    public boolean existsByTitle(String title) {
-        return booksRepo.existsByTitle(title);
-    }
 }

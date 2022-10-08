@@ -56,6 +56,10 @@ public class GenreController {
         //TODO only admin users should be able to update genres
 
         Genre found = genreService.findByGenre(toUpdate.toUpperCase()).orElseThrow(() -> new NotFoundException("Genre"));
+
+        if (found.getGenre().equalsIgnoreCase(reqBody.getGenre()))
+            return found;
+
         found.setGenre(reqBody.getGenre().toUpperCase());
         return genreService.save(found);
     }

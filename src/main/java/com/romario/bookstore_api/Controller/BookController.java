@@ -47,11 +47,13 @@ public class BookController {
     //list books per specification
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<BookResponse> findBySpecification(@Valid @RequestBody BookFilterReq request) {
+    public List<BookResponse> findBySpecification(
+            @Valid BookFilterReq request,
+            @RequestParam() Optional<Integer> page) {
 
         //since title is the where clause, it cannot be null.
-        if(request.getTitle() == null) request.setTitle("");
-        List<Book> foundBooks = bookService.findBySpecification(request);
+        if (request.getTitle() == null) request.setTitle("");
+        List<Book> foundBooks = bookService.findBySpecification(request, page.orElse(0));
         return foundBooks.stream().map(bookResConverter::convert).collect(Collectors.toList());
     }
 

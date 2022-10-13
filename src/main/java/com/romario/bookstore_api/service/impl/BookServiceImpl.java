@@ -1,11 +1,13 @@
 package com.romario.bookstore_api.service.impl;
 
 import com.romario.bookstore_api.Enum.BookConditionType;
+import com.romario.bookstore_api.custom.MyConstants;
 import com.romario.bookstore_api.model.entity.Book;
 import com.romario.bookstore_api.model.request.BookFilterReq;
 import com.romario.bookstore_api.repository.BooksRepo;
 import com.romario.bookstore_api.service.BookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -32,7 +34,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> findBySpecification(BookFilterReq filters) {
+    public List<Book> findBySpecification(BookFilterReq filters, int page) {
 
         //If price is given ignore price range
         if (filters.getPrice() != null) {
@@ -50,6 +52,6 @@ public class BookServiceImpl implements BookService {
                 .and(filters.getPriceEnd() == null ? null : priceLessThan(filters.getPriceEnd()))
                 .and(filters.getIsbn() == null ? null : isbnEquals(filters.getIsbn()));
 
-        return booksRepo.findAll(base);
+        return booksRepo.findAll(base, PageRequest.of(page, MyConstants.PAGE_COUNT)).getContent();
     }
 }

@@ -13,7 +13,7 @@ public interface BookService {
 
     Book save (Book book);
 
-    List<Book> findBySpecification(BookFilterReq filters);
+    List<Book> findBySpecification(BookFilterReq filters, int page);
 
 
 }

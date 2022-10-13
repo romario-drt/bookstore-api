@@ -1,14 +1,10 @@
 package com.romario.bookstore_api.custom.converter;
 
 import com.romario.bookstore_api.Enum.BookConditionType;
-import com.romario.bookstore_api.model.entity.Author;
 import com.romario.bookstore_api.model.entity.Book;
-import com.romario.bookstore_api.model.entity.Genre;
 import com.romario.bookstore_api.model.request.BookReq;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-
-import java.util.stream.Collectors;
 
 @Component
 public class RepToBookConverter implements Converter<BookReq, Book> {

@@ -20,6 +20,6 @@ public class ValidEnumTypeValidator implements ConstraintValidator<ValidEnumType
 
     @Override
     public boolean isValid(CharSequence value, ConstraintValidatorContext context) {
-        return acceptedValues.contains(value.toString());
+        return value == null || acceptedValues.contains(value.toString());
     }
 }

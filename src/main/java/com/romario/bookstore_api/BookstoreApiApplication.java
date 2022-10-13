@@ -23,6 +23,5 @@ public class BookstoreApiApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        authorService.findIn(List.of("jack London","Martel")).forEach(System.out::println);
     }
 }

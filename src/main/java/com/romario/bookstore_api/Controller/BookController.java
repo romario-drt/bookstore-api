@@ -7,6 +7,7 @@ import com.romario.bookstore_api.exception.NotFoundException;
 import com.romario.bookstore_api.model.entity.Author;
 import com.romario.bookstore_api.model.entity.Book;
 import com.romario.bookstore_api.model.entity.Genre;
+import com.romario.bookstore_api.model.request.BookFilterReq;
 import com.romario.bookstore_api.model.request.BookReq;
 import com.romario.bookstore_api.model.response.BookResponse;
 import com.romario.bookstore_api.service.AuthorService;
@@ -20,6 +21,7 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/books")
@@ -34,6 +36,7 @@ public class BookController {
     private final BookToResConverter bookResConverter;
 
 
+    //get book by title
     @GetMapping("/{title}")
     @ResponseStatus(HttpStatus.OK)
     public BookResponse findByTitle(@PathVariable String title) {
@@ -41,6 +44,19 @@ public class BookController {
         return bookResConverter.convert(found);
     }
 
+    //list books per specification
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public List<BookResponse> findBySpecification(@Valid @RequestBody BookFilterReq request) {
+
+        //since title is the where clause, it cannot be null.
+        if(request.getTitle() == null) request.setTitle("");
+        List<Book> foundBooks = bookService.findBySpecification(request);
+        return foundBooks.stream().map(bookResConverter::convert).collect(Collectors.toList());
+    }
+
+
+    //save book
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public BookResponse save(@Valid @RequestBody BookReq request) {
@@ -58,12 +74,11 @@ public class BookController {
 
         //handle authors
         List<Author> foundAuthors = authorService.findIn(request.getAuthors());
-
         request.getAuthors().forEach(requestAuthor -> {
-            Optional<Author> exists = foundAuthors.stream()
-                    .filter(author -> author.getName().equalsIgnoreCase(requestAuthor)).findFirst();
-
-            exists.ifPresentOrElse(toSave.getAuthors()::add, () -> toSave.getAuthors().add(new Author(requestAuthor)));
+            foundAuthors.stream()
+                    .filter(author -> author.getName().equalsIgnoreCase(requestAuthor))
+                    .findFirst()
+                    .ifPresentOrElse(toSave.getAuthors()::add, () -> toSave.getAuthors().add(new Author(requestAuthor)));
         });
 
         bookService.save(toSave);
